@@ -1,6 +1,15 @@
+body {
+  font-family: sans-serif;
+  background-color: #e87f1a;
+}
 #mainSubtitle {
   font-style: italic;
   margin-top: 0px;
+  padding-bottom: 0px;
+}
+h1 {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 }
 .active{
   background-color: red;
@@ -8,6 +17,7 @@
 nav ul {
   list-style-type: none;
   margin: 0;
+  margin-left: -28px;
   padding: 0;
   overflow: hidden;
   background-color: #333333;
@@ -16,6 +26,7 @@ nav ul {
   width: 100%;
   border-style: solid;
   border-color: black;
+  margin-bottom: 16px;
 }
 nav ul li {
   float: left;
@@ -38,4 +49,15 @@ body:not(nav) {
   padding:20px;
   margin-top:30px;
   height:1500px;
+}
+img {
+  width:calc(250px + 15vw);
+}
+iframe {
+  width: 74.67vw;
+  height:42vw;
+}
+p,
+ul {
+  font-size: 20px;
 }
