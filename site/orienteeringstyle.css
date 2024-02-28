@@ -1,5 +1,6 @@
 #mainSubtitle {
   font-style: italic;
+  margin-top: 0px;
 }
 .active{
   background-color: red;
@@ -13,6 +14,8 @@ nav ul {
   position: fixed;
   top: 0;
   width: 100%;
+  border-style: solid;
+  border-color: black;
 }
 nav ul li {
   float: left;
