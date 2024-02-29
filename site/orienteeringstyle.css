@@ -58,6 +58,7 @@ iframe {
   height:42vw;
 }
 p,
-ul {
+ul:not(nav),
+h4 {
   font-size: 22px;
 }
