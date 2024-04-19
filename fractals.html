@@ -8,10 +8,170 @@
   <body>
     <h1>Fractal Fun</h1>
     <h2 id="mainSubtitle">An exploration into variations of basic fractals</h2>
+    <div>
     <h3>Koch Curve</h3>
     <p>
       Basic curve <code>draw_koch(t,4,20)</code>:
     </p>
     <img src="koch_basic.png" width="50%">
+    <p>
+        Here, there is a hexagon made up of 6 inverted koch curves, followed by 3 koch curves in the opposite direction following the angles of the existing shape, creating a nice multi-layered snowflake effect. The color is also a random color between cyan and blue. <code>koch_curve(t, 6, 100)</code>
+      </p>
+      <img src="koch.png" width="50%">
+      <pre>
+        <code>
+          def draw_koch(t,depth,length):
+              d=depth-1
+              l=length
+              if depth==1:
+                  t.pencolor(52,52+random.randrange(183), 235)
+                  t.fd(length)
+                  t.width(2+random.randrange(1))
+              else:
+                  draw_koch(t,d,l)
+                  t.lt(60)
+                  draw_koch(t,d,l)
+                  t.rt(120)
+                  draw_koch(t,d,l)
+                  t.lt(60)
+                  draw_koch(t,d,l)
+          def draw_koch_fancy(t,depth,length):
+              i=0
+              while i < 6:
+                  draw_koch(t,depth, length)
+                  t.lt(60)
+                  i+=1
+              t.pu()
+              t.fd(length*(3**(depth-1)))
+              t.lt(150)
+              t.pd()
+              j=0
+              while j < 3:
+                  draw_koch(t,depth+1,(length*(1/3)*(3**(1/2))))
+                  t.rt(120)
+                  j+=1
+              t.rt(30)
+        </code>
+      </pre>
+    </div>
+
+    <hr>
+
+    <div>
+      <h2>Sierpinski Triangle</h2>
+      <p>
+        Basic triangle <code>sierpinski(t, 5, 200)</code>
+      </p>
+      <img src="sierpinski-basic.png">
+      <p>
+        This Sierpinski triangle has an added Sierpinski triangle in the middle half the size and 1 depth less, drawn only at depths above 3. Each base case triangle is also a random color of the rainbow!<code>sierpinski(t, 6, 100)</code>
+      </p>
+      <img src="sierpinski.png">
+      <pre>
+        <code>
+          def triangle(t, size):
+              t.lt(60)
+              t.fd(size)
+              t.rt(120)
+              t.fd(size)
+              t.rt(120)
+              t.fd(size)
+              t.rt(180)
+          def draw_sierpinski_fancy(t, depth, length):
+              t.pencolor("red")
+              if depth==1:
+                  t.pd()
+                  t.pencolor(random.sample(["red", "blue", "cyan", "orange", "yellow", "purple", "green"], 1).pop())
+                  triangle(t,length)
+              else:
+                  draw_sierpinski_fancy(t, depth-1, length/2)
+                  t.pu()
+                  t.lt(60)
+                  t.fd(length/2)
+                  t.rt(60)
+                  t.pd()
+                  draw_sierpinski_fancy(t, depth-1, length/2)
+                  t.pu()
+                  t.rt(60)
+                  t.fd(length/2)
+                  t.lt(60)
+                  t.pd()
+                  draw_sierpinski_fancy(t, depth-1, length/2)
+                  t.pu()
+                  t.lt(120)
+                  t.fd(length/4)
+                  t.rt(120)
+                  if depth>3:
+                      t.pd()
+                      draw_sierpinski_fancy(t, depth-2, length/4)
+                  t.pu()
+                  t.rt(60)
+                  t.fd(length/4)
+                  t.rt(120)
+                  t.fd(length/2)
+                  t.rt(180)
+        </code>
+      </pre>
+    </div>
+
+    <hr>
+
+    <div>
+      <h2>Trees</h2>
+      <p>
+        Basic tree <code>tree(t, 4, 50, 20)</code>
+      </p>
+      <img src="tree-basic.png">
+      <p>
+        This tree also has several modifications:
+        <ul>
+          <li>Each branch gets shorter in length.</li>
+          <li>Each branch gets smaller in width.</li>
+          <li>The "leaves" are green while the branches are brown.</li>
+          <li>Subtrees are drawn using a random angle within a range instead of the same angle each time.</li>
+        </ul>
+        <code>tree(t, 10, 150, 20, 11)</code>
+      </p>
+      <img src="tree.png">
+      <pre>
+        <code>
+          def tree_fancy(t, depth, length, angle, width, min_back):
+              t.width(width)
+              if depth==1:
+                  t.pencolor("blue")
+                  t.fd(length)
+                  t.pu()
+                  t.bk(length)
+                  t.pd()
+              else:
+                  t.pencolor("pink")
+                  t.fd(length)
+                  a=angle+random.randrange(-10,10)
+                  b=angle+random.randrange(-10,10)
+                  t.rt(a)
+                  tree_fancy(t, depth-1, length*(0.5+(random.randrange(20)/100)), angle, width-1, min_back)
+                  t.lt((a+b))
+                  tree_fancy(t, depth-1, length*(0.5+(random.randrange(20)/100)), angle, width-1, min_back)
+                  t.rt(b)
+                  t.pu()
+                  t.bk(length)
+                  t.pencolor("pink")
+                  t.pd()
+                  if depth>=min_back:
+                      t.rt(180)
+                      t.width(width)
+                      t.fd(length)
+                      t.rt(a)
+                      tree_fancy(t, depth-1, length*(0.5+(random.randrange(20)/100)), angle, width-1, min_back)
+                      t.lt((a+b))
+                      tree_fancy(t, depth-1, length*(0.5+(random.randrange(20)/100)), angle, width-1, min_back)
+                      t.rt(b)
+                      t.pu()
+                      t.bk(length)
+                      t.pd()
+                      t.rt(180)
+        </code>
+      </pre>
+    </div>
   </body>
 </html>
