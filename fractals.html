@@ -15,7 +15,7 @@
     </p>
     <img src="koch_basic.png" width="50%">
     <p>
-        Here, there is a hexagon made up of 6 inverted koch curves, followed by 3 koch curves in the opposite direction following the angles of the existing shape, creating a nice multi-layered snowflake effect. The color is also a random color between cyan and blue. <code>koch_curve(t, 6, 100)</code>
+        Here, there is a hexagon made up of 6 inverted koch curves, followed by 3 koch curves in the opposite direction following the angles of the existing shape, creating a nice multi-layered snowflake effect. The color is also a random color between cyan and blue. <code>draw_kotch_fancy(t, 6, 100)</code>:
       </p>
       <img src="koch.png" width="50%">
       <pre>
@@ -60,11 +60,11 @@
     <div>
       <h2>Sierpinski Triangle</h2>
       <p>
-        Basic triangle <code>sierpinski(t, 5, 200)</code>
+        Basic triangle <code>draw_sierpinski(t, 5, 200)</code>:
       </p>
-      <img src="sierpinski-basic.png">
+      <img src="sierpinski_basic.png">
       <p>
-        This Sierpinski triangle has an added Sierpinski triangle in the middle half the size and 1 depth less, drawn only at depths above 3. Each base case triangle is also a random color of the rainbow!<code>sierpinski(t, 6, 100)</code>
+        This Sierpinski triangle has an added Sierpinski triangle in the middle half the size and 1 depth less, drawn only at depths above 3. Each base case triangle is also a random color of the rainbow!<code>draw_sierpinski_fancy(t, 6, 100)</code>:
       </p>
       <img src="sierpinski.png">
       <pre>
@@ -119,18 +119,19 @@
     <div>
       <h2>Trees</h2>
       <p>
-        Basic tree <code>tree(t, 4, 50, 20)</code>
+        Basic tree <code>tree(t, 4, 50, 20)</code>:
       </p>
-      <img src="tree-basic.png">
+      <img src="tree_basic.png">
       <p>
         This tree also has several modifications:
         <ul>
-          <li>Each branch gets shorter in length.</li>
-          <li>Each branch gets smaller in width.</li>
-          <li>The "leaves" are green while the branches are brown.</li>
-          <li>Subtrees are drawn using a random angle within a range instead of the same angle each time.</li>
+          <li>Each branch gets shorter in length by about 60%, though the exact percentage is slightly random.</li>
+          <li>Each branch gets smaller in width, with the width decreasing by 1 with each recursion.</li>
+          <li>The tips are blue while the rest is pink.</li>
+          <li>At each turn, the angle is slightly random.</li>
+          <li>There is a <code>min_back</code> parameter, which is the minimum depth a given branch has to be in order to also have a branch in its pposite direction.</li>
         </ul>
-        <code>tree(t, 10, 150, 20, 11)</code>
+        <code>tree_fancy(t, 7, 200, 40, 7, 6)</code>:
       </p>
       <img src="tree.png">
       <pre>
