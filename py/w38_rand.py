@@ -9,5 +9,8 @@ print('''<!DOCTYPE html>
   <head>
     <meta charset="utf-8">
     <title>SSUNKO Index</title>
-  </head>''')
-print('a random number for you:', r)
+  </head>
+  <body>
+      <p>a random number for you:''', r,'''</p>
+  </body>
+</html>''')
